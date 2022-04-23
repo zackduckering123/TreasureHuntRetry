@@ -1,4 +1,7 @@
 package com.company;
+
+import com.company.repository;
+
 public class Main {
     public static char[][] board = new char[10][10];
 
@@ -20,16 +23,25 @@ public class Main {
 
     public static int userInput() {
         int p = 0;
-        int x = repository.getInput("enter your X coordinate between 1 and 10");
-        int y = repository.getInput("enter your Y coordinate between 1 and 10");
+        int f = 0;
         for (int i = 0; i < 10; i++) {
-        if (board[x][y] == 'T') {
-            System.out.println("Congratulations you landed on the treasure");
-            p = p + 1;
-        } else {
-            System.out.println("incorrect");
+            int x = repository.getInput("Enter your X coordinate between 1 and 10");
+            x = x - 1;
+            int y = repository.getInput("Enter your Y coordinate between 1 and 10");
+            y = y - 1;
+
+            if (board[x][y] == 'T') {
+                System.out.println("Congratulations you landed on the treasure");
+                p = p + 1;
+                board[x][y] = ' ';
+                f = 9 - i;
+                System.out.println("You have " + f + " turns left");
+            } else {
+                System.out.println("incorrect");
+                f = 9 - i;
+                System.out.println("You have " + f + " turns left");
+            }
         }
-    }
-    return p;
+        return p;
     }
 }
